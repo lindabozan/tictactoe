@@ -50,8 +50,8 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.start_game:hover {
-    background-color: #50567a;
+.btn:hover {
+    background-color: #6b729f;
 }
 
 

@@ -9,7 +9,6 @@ function start_game(){
 const elements = document.querySelectorAll(".tic");
 
 function play_game() {
-    console.log("Play game");
     if(!initialized){
         elements.forEach((tic) => {
             tic.addEventListener("click", function () {
@@ -28,6 +27,7 @@ function put_sign(tic) {
 }
 
 function check_win(next_player) {
+    check_draw(next_player);
     for (let i = 0; i < 3; i++) {
         let wins_row = 0;
         let wins_col = 0;
@@ -48,10 +48,22 @@ function check_win(next_player) {
         elements[6].innerText === next_player
     ) end_game(next_player);
 }
+function check_draw(next_player) {
+    let count = 0;
+    elements.forEach((tic) => {
+        if(tic.innerText !== "")count++;
+    })
+    if(count === 9){
+        next_player = "DRAW";
+        end_game(next_player);
+    }
+}
 
 function end_game(next_player) {
     const end = document.getElementById("start_game_container");
-    end.style.display = "block";
+    end.style.display = "flex";
+    end.style.justifyContent = "center";
+    end.style.alignItems = "center";
     let button = document.getElementById("start_game");
     button.textContent = "Restart";
 }
@@ -59,8 +71,13 @@ function restart() {
     elements.forEach((tic) => {
         tic.innerText = '';
     });
+    next_player = "O";
+    initialized = false;
     start_game();
 }
+
+
+
 
 
 
